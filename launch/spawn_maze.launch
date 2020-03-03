@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<launch>
+  <param name="red_box_path" type="str" value="$(find gazebo_maze_generator)/models/box/red_box.urdf"/>
+  <!-- <param name="red_box_path" type="str" value="$(find gazebo_maze_generator)/worlds/shelves/model.sdf"/> -->
+
+  <arg name="limited" default="true"/>
+    <arg name="paused" default="false"/>
+    <arg name="gui" default="true"/>
+    <arg name="debug" default="false" />
+    <arg name="sim" default="true" />
+
+    <!-- startup simulated world -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+      <arg name="world_name" default="worlds/empty.world"/>
+      <arg name="paused" value="$(arg paused)"/>
+      <arg name="gui" value="$(arg gui)"/>
+    </include>
+
+    <node name="spawn_objects" pkg="gazebo_maze_generator" type="spawn_objects" output="screen" />
+
+</launch>
